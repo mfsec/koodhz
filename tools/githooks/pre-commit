@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# Must have pylint and pep8 installed in the virtualenv!
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+while IFS= read -r file; do
+    files+=("$file");
+done < <(git diff --name-only --cached --diff-filter=ACMRTUXB HEAD -- \*py);
+
+if (( ${#files[@]} == 0 )); then
+    exit "0";
+fi
+
+if [ -n "$(git diff --name-only --diff-filter=ACMRTUXB -- "${files[@]}")" ]; then
+    echo "Some files from the index and the tree differ."
+    echo "Stash the changes before commiting. See --keep-index git stash option."
+    exit "1";
+fi
+
+$DIR/../../tools/lint "${files[@]}"

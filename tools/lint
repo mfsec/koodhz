@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# Must have pylint and pep8 installed in the virtualenv!
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $DIR/../bin/activate
+
+ret=0;
+
+for file in "$@"; do
+    pylint_output=$(pylint -rn -iy --rcfile="$DIR/../resources/pylint.ini" --output-format=colorized "$file")
+    pylint_status=$?
+    if [[ $pylint_status -ne 0 ]]; then
+        echo
+        echo
+        echo "$pylint_output"
+        ret=1
+    fi
+
+    pep8_output=$(pep8 "$file" --show-source)
+    pep8_status=$?
+    if [[ $pep8_status -ne 0 ]]; then
+        echo
+
+        if [[ $pylint_status -eq 0 ]]; then
+            echo
+            echo -e "\e[7;33mpep8 errors for $file\e[0m"
+            echo
+        fi
+
+        echo "$pep8_output"
+        ret=1
+    fi
+done
+
+exit "$ret";

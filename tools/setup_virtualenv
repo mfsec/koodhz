@@ -1,0 +1,30 @@
+#This script sets up a virtual env in the parent of the folder than contains it
+
+if [[ -n "$BASH" ]]
+then
+    if [[ ! "$0" =~ .*bash ]]
+    then
+        echo "This file must be sourced"
+        exit
+    fi
+
+    DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+fi
+
+if [[ -n "$ZSH_VERSION" ]]
+then
+    if [[ "$zsh_eval_context" != "toplevel file" ]]
+    then
+        echo "This file must be sourced"
+        exit
+    fi
+
+    DIR="$( cd "$( dirname "$0" )" && pwd )"
+fi
+
+if [ ! -f ./bin/python ]
+then
+    virtualenv $DIR/..
+fi
+
+source $DIR/../bin/activate
