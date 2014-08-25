@@ -12,6 +12,4 @@ Development Enviroment
 
 - `cp tools/githooks/pre-commit .git/hooks`
 
-- `cd Koodhz`
-
 - `python setup.py develop`
