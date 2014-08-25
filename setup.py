@@ -15,6 +15,7 @@ CHANGES, err = git_log.communicate()
 requires = [
     "pylint==0.28.0",
     "pep8==1.4.6",
+    "Twisted==14.0.0",
     ]
 
 setup(name='Koodhz',
