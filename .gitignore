@@ -1,0 +1,50 @@
+#python
+*.py[co]
+
+#virtual env
+/bin
+/include
+/lib
+/local
+
+#sublime
+*.sublime-*
+
+#vim
+*~
+*.swp
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+local
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
